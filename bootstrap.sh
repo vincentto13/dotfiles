@@ -50,8 +50,8 @@ install_git_and_clone_dotfiles() {
     cd "$HOME/.dotfiles" || exit
     git pull
   else
-    # Clone the dotfiles repository into $HOME/.dotfiles
-    git clone https://github.com/vincentto13/dotfiles "$HOME/.dotfiles"
+    # Clone the dotfiles repository using HTTPS into $HOME/.dotfiles
+    git clone https://github.com/vincentto13/dotfiles.git "$HOME/.dotfiles"
     cd "$HOME/.dotfiles" || exit
   fi
 
