@@ -56,7 +56,11 @@ install_git_and_clone_dotfiles() {
   fi
 
   # Run the setup script
-  ./setup.sh
+  ./setup_brew.sh
+  ./setup_locale.sh
+  ./setup_zsh.sh
+  ./setup_tmux.sh
+  ./setup_nvim.sh
 }
 
 # Run the installation function
