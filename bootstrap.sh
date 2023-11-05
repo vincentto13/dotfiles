@@ -51,13 +51,14 @@ install_git_and_clone_dotfiles() {
     git pull
   else
     # Clone the dotfiles repository using HTTPS into $HOME/.dotfiles
-    git clone https://github.com/vincentto13/dotfiles.git "$HOME/.dotfiles"
+    git clone --recurse-submodules https://github.com/vincentto13/dotfiles.git "$HOME/.dotfiles"
     cd "$HOME/.dotfiles" || exit
   fi
 
   # Run the setup script
   ./scripts/setup_brew.sh
   ./scripts/setup_locale.sh
+  ./scripts/setup_git.sh
   ./scripts/setup_zsh.sh
   ./scripts/setup_tmux.sh
   ./scripts/setup_nvim.sh
