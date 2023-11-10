@@ -62,6 +62,7 @@ install_git_and_clone_dotfiles() {
   ./scripts/setup_zsh.sh
   ./scripts/setup_tmux.sh
   ./scripts/setup_nvim.sh
+  ./scripts/setup_ssh.sh
 }
 
 # Run the installation function
