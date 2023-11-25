@@ -7,8 +7,8 @@ if [ "$(uname)" == "Darwin" ]; then
 elif [ -f /etc/debian_version ]; then
   echo "Detected Debian-based system"
   sudo apt-get update && sudo apt-get install locales
-  sudo locale-gen pl_PL.UTF-8
-  sudo update-locale LANG=pl_PL.UTF-8 LC_MESSAGES=POSIX LANGUAGE=pl_PL.UTF-8 LC_ALL=pl_PL.UTF-8
+  sudo locale-gen pl_PL.UTF-8 en_US.UTF-8
+  sudo update-locale LANG=en_US.UTF-8 
 elif [ -f /etc/alpine-release ]; then
   echo "Detected Alpine Linux"
   # Alpine Linux doesn't use locale-gen, locales are set during installation
