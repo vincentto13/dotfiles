@@ -70,4 +70,4 @@ install_oh_my_zsh
 install_zsh_plugins
 change_shell
 create_symlink $HOME/.dotfiles/.zshrc $HOME/.zshrc
-create_symlink $HOME/.dotfiles/.p10k.zsh $HOME/.p10k.zsh
+create_symlink $HOME/.dotfiles/.config/starship $HOME/.config/starship
