@@ -46,10 +46,12 @@ install_zsh_plugins() {
   if [ ! -d "$PLUGINS_CUSTON/themes/catppuccin" ]; then
     git clone https://github.com/catppuccin/zsh-syntax-highlighting.git ${PLUGINS_CUSTOM}/themes/catppuccin
   fi
+}
 
-  echo "Installing PowerLevel10k"
-  if [ ! -d "$ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then 
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+install_starship() {
+  echo "Installing Starship"
+  if  ! command -v starship &>/dev/null; then
+    curl -sS https://starship.rs/install.sh | sh
   fi
 }
 
@@ -68,6 +70,7 @@ change_shell() {
 install_zsh
 install_oh_my_zsh
 install_zsh_plugins
+install_starship
 change_shell
 create_symlink $HOME/.dotfiles/.zshrc $HOME/.zshrc
 create_symlink $HOME/.dotfiles/.config/starship $HOME/.config/starship

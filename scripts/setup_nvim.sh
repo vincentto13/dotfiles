@@ -16,4 +16,4 @@ sudo ln -sf /opt/nvim/squashfs-root/AppRun /usr/bin/nvim
 sudo rm /opt/nvim/nvim.appimage
 
 create_symlink $HOME/.dotfiles/.config/nvim $HOME/.config/nvim
-create_symlink $HOME/.dotfiles/.config/nvim_custom/custom/ $HOME/.config/nvim/custom
+create_symlink $HOME/.dotfiles/.config/nvim_custom/custom/ $HOME/.config/nvim/lua/custom
