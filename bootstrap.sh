@@ -58,12 +58,14 @@ install_git_and_clone_dotfiles() {
   # Run the setup script
   ./scripts/setup_brew.sh
   ./scripts/setup_locale.sh
+  ./scripts/setup_utils.sh
   ./scripts/setup_git.sh
   ./scripts/setup_python.sh
   ./scripts/setup_zsh.sh
   ./scripts/setup_tmux.sh
   ./scripts/setup_nvim.sh
   ./scripts/setup_ssh.sh
+  fstrim -av
 }
 
 # Run the installation function
