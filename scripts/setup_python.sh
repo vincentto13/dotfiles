@@ -15,10 +15,10 @@ echo "Python version ($current_version) does not match the target version ($targ
 
 
 sudo apt update
-sudo apt install software-properties-common -y
+sudo apt install -y software-properties-common 
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt update
-sudo apt install python$PYTHON_VERSION
+sudo apt install -y python$PYTHON_VERSION
 sudo curl -sS https://bootstrap.pypa.io/get-pip.py | python$PYTHON_VERSION
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python$current_version 1
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python$PYTHON_VERSION 2

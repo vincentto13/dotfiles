@@ -73,4 +73,5 @@ install_zsh_plugins
 install_starship
 change_shell
 create_symlink $HOME/.dotfiles/.zshrc $HOME/.zshrc
+mkdir -p $HOME/.config
 create_symlink $HOME/.dotfiles/.config/starship $HOME/.config/starship

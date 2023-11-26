@@ -59,6 +59,7 @@ install_git_and_clone_dotfiles() {
   ./scripts/setup_brew.sh
   ./scripts/setup_locale.sh
   ./scripts/setup_git.sh
+  ./scripts/setup_python.sh
   ./scripts/setup_zsh.sh
   ./scripts/setup_tmux.sh
   ./scripts/setup_nvim.sh
