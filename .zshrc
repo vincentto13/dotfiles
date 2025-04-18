@@ -1,38 +1,69 @@
-# Locale setup (FIX)
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LC_MESSAGES=POSIX
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# PATH setup
-export PATH=$PATH:$HOME/.local/bin
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 
-alias vim=nvim
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
 
-ZSH_THEME="robbyrussell"
-#ZSH_THEME="powerlevel10k/powerlevel10k"
+zinit ice as"command" from"gh-r" \
+          atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+          atpull"%atclone" src"init.zsh"
+zinit light starship/starship
 
-# powerlevel10k
-#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-#fi
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# Add in snippets
+zinit snippet OMZL::git.zsh
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+zinit snippet OMZP::archlinux
+zinit snippet OMZP::aws
+zinit snippet OMZP::kubectl
+zinit snippet OMZP::kubectx
+zinit snippet OMZP::command-not-found
 
-export ZSH_COMPDUMP="$HOME/.cache/zsh/.zcompdump-$HOST-$ZSH_VERSION"
+# Load completions
+autoload -Uz compinit && compinit
 
-#ZSH_THEME="powerlevel10k/powerlevel10k"
+zinit cdreplay -q
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search)
+# Keybindings
+bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
 
-source $ZSH/oh-my-zsh.sh
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Adding Catpuccin ZSH styliing
-[[ ! -f ${ZSH}/custom/themes/catppuccin/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh ]] || source ${ZSH}/custom/themes/catppuccin/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
+# Aliases
+alias ls='ls --color'
+alias vim='nvim'
+alias c='clear'
 
-#[[ -f ~/.acme.sh/acme.sh.env ]] || source ~/.acme.sh/acme.sh.env
-eval "$(starship init zsh)"
-export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
