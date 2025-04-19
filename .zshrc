@@ -65,5 +65,6 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 alias ls='ls --color'
 alias vim='nvim'
 alias c='clear'
+alias nix-setup='nix profile upgrade nix || nix profile install ~/.config/nix'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
