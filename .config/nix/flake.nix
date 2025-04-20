@@ -17,6 +17,7 @@
           name = "dev-tools";
           paths = with pkgs; [
             alacritty
+            fzf
             gcc
             mc
             neovim
