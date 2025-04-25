@@ -81,3 +81,9 @@ alias c='clear'
 alias nix-setup='nix profile upgrade nix || nix profile install ~/.config/nix'
 
 eval "$(fzf --zsh)"
+
+# Helper scripts
+[[ -f "$HOME/.scripts/helpers.sh" ]] && source "$HOME/.scripts/helpers.sh"
+
+# Check for env updates
+update_my_env
