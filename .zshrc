@@ -61,10 +61,23 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
+# Set up prefered editor
+# # Set default editor based on availability: nvim > vim > vi
+if command -v nvim &>/dev/null; then
+  export EDITOR="nvim"
+  export VISUAL="nvim"
+elif command -v vim &>/dev/null; then
+  export EDITOR="vim"
+  export VISUAL="vim"
+else
+  export EDITOR="vi"
+  export VISUAL="vi"
+fi
+
 # Aliases
 alias ls='ls --color'
 alias vim='nvim'
 alias c='clear'
 alias nix-setup='nix profile upgrade nix || nix profile install ~/.config/nix'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(fzf --zsh)"
