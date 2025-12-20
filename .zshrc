@@ -75,11 +75,16 @@ else
 fi
 
 # Aliases
-alias ls='ls --color'
+alias ls='eza'
+alias ll='eza -l --icons'
+alias la='eza -la --icons'
+alias ltr='eza -la --icons --sort=time --reverse'
+tree() { eza --tree --icons -L "${1:-3}" "${@:2}"; }
 alias vim='nvim'
 alias c='clear'
 alias nix-setup='nix profile upgrade nix || nix profile install ~/.config/nix'
 
+# Configure fzf
 eval "$(fzf --zsh)"
 
 # Helper scripts
@@ -87,3 +92,5 @@ eval "$(fzf --zsh)"
 
 # Check for env updates
 update_my_env
+
+export PATH="$HOME/.local/bin:$PATH"

@@ -17,10 +17,13 @@
           name = "dev-tools";
           paths = with pkgs; [
             alacritty
+            ansible
+            eza
             fzf
             gcc
             mc
             neovim
+            ripgrep
             tmux
           ];
         };
