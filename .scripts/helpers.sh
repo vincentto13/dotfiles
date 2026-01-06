@@ -1,6 +1,10 @@
 #!/bin/zsh
 
 update_my_env() {
+  # Prevent recursive calls when sourcing .zshrc
+  [[ -n "$_UPDATE_MY_ENV_RUNNING" ]] && return 0
+  _UPDATE_MY_ENV_RUNNING=1
+
   # Resolve the symlink to find the original script location
   local script_path
   script_path=$(readlink -f "${(%):-%x}")  # This gets the real path even if symlinked
@@ -43,7 +47,8 @@ update_my_env() {
     echo "🔁 Reloading shell environment..."
     source ~/.zshrc
   fi
-  
-  cd -
+
+  cd - > /dev/null
+  unset _UPDATE_MY_ENV_RUNNING
 }
 
