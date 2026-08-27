@@ -78,7 +78,8 @@ fi
 alias ls='eza'
 alias ll='eza -l --icons'
 alias la='eza -la --icons'
-alias ltr='eza -la --icons --sort=time --reverse'
+alias ltr='eza -la --icons --sort=time'
+alias ltra='eza -la --icons --sort=time'
 tree() { eza --tree --icons -L "${1:-3}" "${@:2}"; }
 alias vim='nvim'
 alias c='clear'
