@@ -87,6 +87,8 @@ alias nix-setup='nix profile upgrade nix || nix profile install ~/.config/nix'
 # Configure fzf
 eval "$(fzf --zsh)"
 
+export PATH=$PATH:$HOME/.cargo/bin
+
 # Helper scripts
 [[ -f "$HOME/.scripts/helpers.sh" ]] && source "$HOME/.scripts/helpers.sh"
 
@@ -94,3 +96,6 @@ eval "$(fzf --zsh)"
 update_my_env
 
 export PATH="$HOME/.local/bin:$PATH"
+
+# Machine-specific configuration (work/home differences, never tracked)
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
