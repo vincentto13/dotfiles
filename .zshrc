@@ -82,6 +82,9 @@ alias ltr='eza -la --icons --sort=time --reverse'
 tree() { eza --tree --icons -L "${1:-3}" "${@:2}"; }
 alias vim='nvim'
 alias c='clear'
+# Force xterm mouse protocol: fixes mouse garbage under TERM=tmux-*,
+# no-op on terminals that already identify as xterm-compatible
+alias mc='mc -x'
 alias nix-setup='nix profile upgrade nix || nix profile install ~/.config/nix'
 
 # Configure fzf
