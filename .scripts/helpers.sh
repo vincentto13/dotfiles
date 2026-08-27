@@ -63,11 +63,17 @@ fix-term() {
   # belt and braces for terminals with partial DECSTR support:
   # ASCII charset, no scroll region, replace mode, normal keypad
   printf '\e(B\e[r\e[4l\e>'
-  # leave a stuck alternate screen (returns to normal scrollback)
-  printf '\e[?1049l'
   # mouse tracking, bracketed paste and focus reporting off; cursor on
   printf '\e[?1000l\e[?1002l\e[?1003l\e[?1006l\e[?1015l\e[?2004l\e[?1004l\e[?25h'
   stty sane
+}
+
+# Return to the normal screen buffer. Run this after copying what you
+# need from a session that died inside a full-screen app (tmux, mc):
+# fix-term keeps that frozen frame visible on purpose, but the
+# alternate screen has no scrollback, so don't stay there.
+main-screen() {
+  printf '\e[?1049l'
 }
 
 # A dropped ssh connection never lets the remote apps send their
