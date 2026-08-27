@@ -56,6 +56,16 @@ update_my_env() {
 # (mouse tracking, bracketed paste, focus events) without clearing
 # the screen, so scrollback of a broken session stays copyable.
 fix-term() {
+  # DECSTR soft reset: scroll region, origin/insert/app-cursor modes,
+  # autowrap, charset - everything a dead remote app can leave behind,
+  # without touching screen contents or scrollback (unlike 'reset')
+  printf '\e[!p'
+  # belt and braces for terminals with partial DECSTR support:
+  # ASCII charset, no scroll region, replace mode, normal keypad
+  printf '\e(B\e[r\e[4l\e>'
+  # leave a stuck alternate screen (returns to normal scrollback)
+  printf '\e[?1049l'
+  # mouse tracking, bracketed paste and focus reporting off; cursor on
   printf '\e[?1000l\e[?1002l\e[?1003l\e[?1006l\e[?1015l\e[?2004l\e[?1004l\e[?25h'
   stty sane
 }
