@@ -52,3 +52,20 @@ update_my_env() {
   unset _UPDATE_MY_ENV_RUNNING
 }
 
+# Undo terminal modes a dead remote session may have left enabled
+# (mouse tracking, bracketed paste, focus events) without clearing
+# the screen, so scrollback of a broken session stays copyable.
+fix-term() {
+  printf '\e[?1000l\e[?1002l\e[?1003l\e[?1006l\e[?1015l\e[?2004l\e[?1004l\e[?25h'
+  stty sane
+}
+
+# A dropped ssh connection never lets the remote apps send their
+# "mouse off" sequences, so clean up as soon as ssh exits.
+ssh() {
+  command ssh "$@"
+  local rc=$?
+  fix-term
+  return $rc
+}
+
